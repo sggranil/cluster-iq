@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block template %}
+    <div class="sidenav-container">
+        <div class="drawer-content">
+            <h1 class="sidenav-brand">
+                <a href="{% url 'dashboard:index' %}">
+                    Cluster IQ
+                </a>
+            </h1>
+            <div class="sidenav-content">
+                <a href="#" class="sidenav-link">
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="sidenav-link">
+                    <span>General Report</span>
+                </a>
+            </div>
+        </div>
+        <div class="main-content">
+            {% block main_content %}
+
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
