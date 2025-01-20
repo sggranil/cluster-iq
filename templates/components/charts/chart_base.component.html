@@ -1,11 +1,14 @@
-<div class="card">
-    <div class="card-header">
+<div class="card shadow-sm border-0 rounded-3">
+    <div class="card-header bg-primary text-white fw-semibold">
         {{ title | default:"Unknown Chart" }}
     </div>
     <div class="card-body">
-        <canvas id="{{ chartId }}Chart"></canvas>
+        <div class="chart-container" style="position: relative; height: 300px;">
+            <canvas id="{{ chartId }}Chart"></canvas>
+        </div>
     </div>
 </div>
+
 
 <script>
     const {{ chartId }}Data = {
@@ -21,10 +24,17 @@
         type: "{{ chartType }}",
         data: {{ chartId }}Data,
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 y: {
                     beginAtZero: true
                 }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
             }
         }
     });
