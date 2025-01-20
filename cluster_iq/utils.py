@@ -29,9 +29,15 @@ def reverse_url(view_name, *args, **kwargs):
 @register.simple_tag
 def url_with_params(view_name, *args, query=None):
     kwargs = {}
-    if query.get('month'):
-        kwargs['month'] = query['month']
-    if query.get('barangay'):
-        kwargs['barangay'] = query['barangay']
+    if 'dashboard' in view_name:
+        if query.get('month'):
+            kwargs['month'] = query['month']
+    if 'consumer' in view_name:
+        if query.get('age_group'):
+            kwargs['age_group'] = query['age_group']
+        if query.get('income_level'):
+            kwargs['income_level'] = query['income_level']
+        if query.get('barangay'):
+            kwargs['barangay'] = query['barangay']
 
     return reverse_url(view_name, *args, **kwargs)
