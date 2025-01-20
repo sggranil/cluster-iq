@@ -1,0 +1,9 @@
+// REM & EM Fns -> Convert Absolute to Relative
+
+@function rem($pixelValue, $remBase: 16) {
+  @return ($pixelValue / $remBase) * 1.6rem;
+}
+
+@function em($pixels, $context: $browser-context) {
+  @return ($pixels / $context) * 1em;
+}

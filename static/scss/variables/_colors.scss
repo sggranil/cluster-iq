@@ -1,0 +1,110 @@
+/* Color System */
+
+// Selector
+
+:root {
+    --cl-green-50: #E0F2F1;  /* Light green */
+    --cl-green-100: #B2DFDB; /* Very light green */
+    --cl-green-500: #009688; /* Medium green */
+    --cl-green-600: #00897B; /* Darker green */
+    --cl-green-700: #00796B; /* Even darker green */
+
+    --cl-white: #FFFFFF;
+    --cl-black: #000000;
+
+    --cl-gray-50: #f6f6f6;
+    --cl-gray-100: #e7e7e7;
+    --cl-gray-200: #d1d1d1;
+    --cl-gray-300: #b0b0b0;
+    --cl-gray-400: #888888;
+    --cl-gray-500: #6d6d6d;
+    --cl-gray-600: #5d5d5d;
+    --cl-gray-700: #4f4f4f;
+    --cl-gray-800: #454545;
+    --cl-gray-900: #3d3d3d;
+
+    --cl-green: #00C853;
+    --cl-yellow: #ffc107;
+    --cl-red: #b62e2b;
+    --cl-purple: #3572dd;
+}
+
+// Color Variables
+
+$green-50: var(--cl-green-50);
+$green-100: var(--cl-green-100);
+$green-500: var(--cl-green-500);
+$green-600: var(--cl-green-600);
+$green-700: var(--cl-green-700);
+
+$white: var(--pt-white);
+$black: var(--pt-black);
+
+$gray-50: var(--pt-gray-50);
+$gray-100: var(--pt-gray-100);
+$gray-200: var(--pt-gray-200);
+$gray-300: var(--pt-gray-300);
+$gray-400: var(--pt-gray-400);
+$gray-500: var(--pt-gray-500);
+$gray-600: var(--pt-gray-600);
+$gray-700: var(--pt-gray-700);
+$gray-800: var(--pt-gray-800);
+$gray-900: var(--pt-gray-900);
+
+$green: var(--pt-green);
+$yellow: var(--pt-yellow);
+$red: var(--pt-red);
+$purple: var(--pt-purple);
+
+// Theme Colors
+
+$primary: $green-500;
+$secondary: $gray-600;
+$success: $green;
+$warning: $yellow;
+$danger: $red;
+$info: $purple;
+$dark: $gray-800;
+$light: $gray-200;
+
+// Background Colors
+
+$bg-primary: $primary;
+$bg-dark-primary: $green-700;
+$bg-secondary: $secondary;
+$bg-success: $success;
+$bg-warning: $warning;
+$bg-danger: $danger;
+
+$bg-white: $white;
+$bg-pale-gray: $gray-50;
+$bg-silver-gray: $gray-100;
+$bg-light-gray: $gray-200;
+
+// Text Colors
+
+$text-primary: $primary;
+$text-secondary: $secondary;
+$text-success: $success;
+$text-warning: $warning;
+$text-danger: $danger;
+$text-info: $purple;
+
+$text-white: $white;
+$text-muted: $gray-200;
+$text-pale-gray: $gray-50;
+$text-light-gray: $gray-200;
+$text-dark-primary: $green-700;
+
+// Border Colors
+
+$border-primary: $primary;
+$border-secondary: $secondary;
+
+$border-danger: $red;
+
+$border-white: $white;
+$border-light-gray: $gray-200;
+$border-dark-primary: $green-700;
+
+/* Color Classes */

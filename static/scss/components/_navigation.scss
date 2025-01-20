@@ -1,0 +1,21 @@
+#sidenav {
+  display: block;
+  width: 250px;
+  height: 100vh;
+  padding: 20px;
+  border: 0;
+  margin-right: auto;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  transition-behavior: allow-discrete;
+  border-bottom-right-radius: 0.625rem;
+  border-top-right-radius: 0.625rem;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateX(-250px);
+  opacity: 0;
+  z-index: 999;
+}
+
+#sidenav:popover-open {
+  opacity: 1;
+  transform: translateX(0px);
+}

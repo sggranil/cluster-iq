@@ -1,0 +1,34 @@
+<!doctype html>
+{% load static %}
+{% load compress %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/rangePlugin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/0f3aeb3563.js" crossorigin="anonymous"></script>
+    {% compress css %}
+        <link href="{% static 'scss/main.scss' %}" rel='stylesheet' type="text/x-scss">
+    {% endcompress %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+
+{% block app %}
+    {% block template %}
+
+    {% endblock %}
+{% endblock %}
+
+<script src="{% static 'js/main.js' %}?time={% now 'U' %}"></script>
+</body>
+</html>

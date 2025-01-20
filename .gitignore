@@ -24,6 +24,7 @@ db.sqlite3
 *.iml
 uwsgi.ini
 settings.py
+/static_serve
 
 # OS #
 .DS_Store

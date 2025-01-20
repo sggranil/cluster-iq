@@ -1,0 +1,70 @@
+<div class="d-flex flex-row align-items-center">
+    <select id="monthYearFilter" class="form-select custom-dropdown form-select-md me-2">
+        <option value="" disabled>Select Month and Year</option>
+    </select>
+    <button id="resetMonthYearFilter" class="btn btn-danger">
+        <i class="fa-solid fa-arrow-rotate-left"></i>
+    </button>
+</div>
+
+<script>
+    const currentDate = new Date();
+    const endYear = 2025;
+    const monthYearFilter = document.getElementById('monthYearFilter');
+    const resetMonthYearFilter = document.getElementById('resetMonthYearFilter');
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+
+    function populateDropdown() {
+        for (let year = currentYear; year <= endYear; year++) {
+            const startMonth = year === currentYear ? currentMonth : 0;
+            const endMonth = year === endYear ? 11 : 11;
+
+            for (let month = startMonth; month <= endMonth; month++) {
+                const monthName = new Date(year, month).toLocaleString('default', { month: 'long' });
+                const value = `${monthName} ${year}`;
+                const option = document.createElement('option');
+                option.value = value;
+                option.textContent = value;
+                monthYearFilter.appendChild(option);
+            }
+        }
+    }
+
+    function setInitialValue() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlMonth = urlParams.get('month');
+
+        if (urlMonth) {
+            const [monthName, year] = urlMonth.split('-');
+            const month = new Date(`${monthName} 1, ${year}`).toLocaleString('default', { month: 'long' });
+            const formattedMonthYear = `${month} ${year}`;
+            monthYearFilter.value = formattedMonthYear;
+        } else {
+            const defaultMonthYear = `${new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} ${currentYear}`;
+            monthYearFilter.value = defaultMonthYear;
+        }
+    }
+
+    monthYearFilter.addEventListener('change', function() {
+        const selectedValue = monthYearFilter.value;
+        const [monthName, year] = selectedValue.split(' ');
+        const monthNumber = new Date(`${monthName} 1, ${year}`).getMonth() + 1;
+        const formattedValue = `${monthNumber.toString().padStart(2, '0')}-${year}`;
+
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('month', formattedValue);
+        window.location.href = currentUrl.toString();
+    });
+
+    resetMonthYearFilter.addEventListener('click', function() {
+        const currentUrl = new URL(window.location.href);
+        const formattedValue = `01-${currentYear}`;
+        currentUrl.searchParams.set('month', formattedValue);
+
+        window.location.href = currentUrl.toString();
+    });
+
+    populateDropdown();
+    setInitialValue();
+</script>

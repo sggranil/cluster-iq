@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block template %}
+    <div class="container-fluid">
+        <nav popover id="sidenav">
+            <div class="row navbar-brand pb-5 lh-sm">
+                <h4 class="fs-4 fw-bold">
+                    Cluster IQ
+                </h4>
+                <span class="fs-6 mt-0 text-muted">Admin | ver 1.0</span>
+            </div>
+            <ul class="nav nav-pills flex-column flex-sm-row">
+                <a class="flex-sm-fill text-sm-left nav-link active" href="{% url_with_params 'dashboard:index' query=request.GET %}">Dashboard</a>
+                <a class="flex-sm-fill text-sm-left nav-link" href="#">Barangay</a>
+                <a class="flex-sm-fill text-sm-left nav-link" href="#">Consumers</a>
+            </ul>
+        </nav>
+        <div class="row">
+            <nav class="navbar navbar-light bg-light">
+                <button class="btn btn-light mx-3" type="button" popovertarget="sidenav" popovertargetaction="show">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </nav>
+            <div class="bg-white">
+                {% block main_content %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
