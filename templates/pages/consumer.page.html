@@ -5,6 +5,46 @@
 
 {% block content %}
     {% block main_content %}
+        <div class="container-fluid py-4">
+            <div class="container">
+                <div class="d-flex flex-sm-row flex-column justify-content-between mb-4">
+                    <h3 class="fw-semibold text-primary">Consumer</h3>
+                    <button class="btn btn-success">
+                        <i class="fa-solid fa-plus"></i> Upload Data (CSV)
+                    </button>
+                </div>
+                <hr>
 
+                <div class="row mb-4">
+                    <div class="col-md-4 col-12 mb-2">
+                        {% include 'components/filters/filter_age_group.component.html' %}
+                    </div>
+                    <div class="col-md-4 col-12 mb-2">
+                        {% include 'components/filters/filter_income_level.component.html' %}
+                    </div>
+                    <div class="col-md-4 col-12 mb-2 d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            {% include 'components/filters/filter_barangay.component.html' %}
+                        </div>
+                        <div class="ms-2">
+                            {% include 'components/filters/filter_delete.component.html' %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consumer Preferences & Charts -->
+                <div class="row">
+                    <div class="col-md-4 my-2">
+                        {% include 'components/charts/chart_base.component.html' with title="Shopping Preferences" chartType="pie" chartId="shoppingPreferences" data=shopping_preferences %}
+                    </div>
+                    <div class="col-md-4 my-2">
+                        {% include 'components/charts/chart_base.component.html' with title="Product Preferences" chartType="bar" chartId="productPreferences" data=product_preferences %}
+                    </div>
+                    <div class="col-md-4 my-2">
+                        {% include 'components/charts/chart_base.component.html' with title="Spending Patterns" chartType="bar" chartId="spendingPatterns" data=spending_patterns %}
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endblock %}
 {% endblock %}
