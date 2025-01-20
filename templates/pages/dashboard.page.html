@@ -3,6 +3,22 @@
 
 {% block content %}
     {% block main_content %}
-        Sample
+        <div class="container">
+            <div class="pt-4 pb-3">
+                <h3 class="fw-semibold">Dashboard</h3>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-md-4 my-2">
+                    {% include 'components/charts/chart.component.html' with title="Age Group Distribution" chartType="bar" chartId="ageGroup" data=age_group %}
+                </div>
+                <div class="col-md-4 my-2">
+                    {% include 'components/charts/chart.component.html' with title="Monthly Spending Distribution" chartType="bar" chartId="monthlySpend" data=monthly_spending %}
+                </div>
+                <div class="col-md-4 my-2">
+                    {% include 'components/charts/chart.component.html' with title="Shopping Frequency" chartType="bar" chartId="shoppingFrequency" data=shopping_frequency %}
+                </div>
+            </div>
+        </div>
     {% endblock %}
 {% endblock %}

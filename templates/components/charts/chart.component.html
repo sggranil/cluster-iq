@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-header">
+        {{ title | default:"Unknown Chart" }}
+    </div>
+    <div class="card-body">
+        <canvas id="{{ chartId }}Chart"></canvas>
+    </div>
+</div>
+
+<script>
+    const {{ chartId }}Data = {
+        labels: [{% for item in data %}"{{ item.label }}"{% if not forloop.last %}, {% endif %}{% endfor %}],
+        datasets: [{
+            label: "{{ title | default:"Unknown Chart" }}",
+            data: [{% for item in data %}{{ item.count }}{% if not forloop.last %}, {% endif %}{% endfor %}],
+            borderWidth: 1
+        }]
+    };
+
+    const {{ chartId }}Chart = new Chart(document.getElementById('{{ chartId }}Chart'), {
+        type: "{{ chartType }}",
+        data: {{ chartId }}Data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
