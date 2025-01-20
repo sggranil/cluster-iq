@@ -1,0 +1,19 @@
+<button id="deleteAllFilter" class="btn btn-danger ms-2">
+    <i class="fa-solid fa-arrow-rotate-left"></i>
+</button>
+
+
+<script>
+    const deleteAllFilter = document.getElementById('deleteAllFilter');
+    document.addEventListener('DOMContentLoaded', function () {
+
+        deleteAllFilter.addEventListener('click', function () {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.delete('month');
+            currentUrl.searchParams.delete('barangay');
+            currentUrl.searchParams.delete('age_group');
+            currentUrl.searchParams.delete('income_level');
+            window.location.href = currentUrl.toString();
+        });
+    });
+</script>
