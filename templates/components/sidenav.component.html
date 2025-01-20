@@ -11,9 +11,9 @@
                 <span class="fs-6 mt-0 text-muted">Admin | ver 1.0</span>
             </div>
             <ul class="nav nav-pills flex-column flex-sm-row">
-                <a class="flex-sm-fill text-sm-left nav-link active" href="{% url_with_params 'dashboard:index' query=request.GET %}">Dashboard</a>
-                <a class="flex-sm-fill text-sm-left nav-link" href="#">Barangay</a>
-                <a class="flex-sm-fill text-sm-left nav-link" href="#">Consumers</a>
+                <a class="flex-sm-fill text-sm-left nav-link {% if 'dashboard' in request.path %}active{% endif %}" href="{% url_with_params 'dashboard:index' query=request.GET %}">Dashboard</a>
+                <a class="flex-sm-fill text-sm-left nav-link {% if 'consumer' in request.path %}active{% endif %}" href="{% url_with_params 'consumer:index' query=request.GET %}">Consumer</a>
+                <a class="flex-sm-fill text-sm-left nav-link" href="#">Geography</a>
             </ul>
         </nav>
         <div class="row">
