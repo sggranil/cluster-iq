@@ -8,10 +8,10 @@
                 <h4 class="fs-4 fw-bold">
                     Cluster IQ
                 </h4>
-                <span class="fs-6 mt-0 text-muted">ver 1.0</span>
+                <span class="fs-6 mt-0 text-muted">Admin | ver 1.0</span>
             </div>
             <ul class="nav nav-pills flex-column flex-sm-row">
-                <a class="flex-sm-fill text-sm-left nav-link active" href="#">Dashboard</a>
+                <a class="flex-sm-fill text-sm-left nav-link active" href="{% url_with_params 'dashboard:index' query=request.GET %}">Dashboard</a>
                 <a class="flex-sm-fill text-sm-left nav-link" href="#">Barangay</a>
                 <a class="flex-sm-fill text-sm-left nav-link" href="#">Consumers</a>
             </ul>
