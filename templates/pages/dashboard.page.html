@@ -5,7 +5,7 @@
 
 {% block content %}
     {% block main_content %}
-        <div class="container-fluid bg-light py-4">
+        <div class="container-fluid py-4">
             <div class="container">
                 <div class="d-flex flex-sm-row flex-column justify-content-between mb-4">
                     <h3 class="fw-semibold text-primary">Dashboard</h3>
@@ -44,4 +44,21 @@
             </div>
         </div>
     {% endblock %}
+{% endblock %}
+
+{% block script %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+            const currentUrl = new URL(window.location.href);
+
+            if (!currentUrl.searchParams.has('month')) {
+                const formattedValue = `${currentMonth}-${currentYear}`;
+                currentUrl.searchParams.set('month', formattedValue);
+                window.location.href = currentUrl.toString();
+            }
+        });
+    </script>
 {% endblock %}
