@@ -2,26 +2,31 @@
 {% load static %}
 
 {% block template %}
-    <div class="sidenav-container">
-        <div class="drawer-content">
-            <h1 class="sidenav-brand">
-                <a href="{% url 'dashboard:index' %}">
+    <div class="container-fluid">
+        <nav popover id="sidenav">
+            <div class="row navbar-brand pb-5 lh-sm">
+                <h4 class="fs-4 fw-bold">
                     Cluster IQ
-                </a>
-            </h1>
-            <div class="sidenav-content">
-                <a href="#" class="sidenav-link">
-                    <span>Dashboard</span>
-                </a>
-                <a href="#" class="sidenav-link">
-                    <span>General Report</span>
-                </a>
+                </h4>
+                <span class="fs-6 mt-0 text-muted">ver 1.0</span>
             </div>
-        </div>
-        <div class="main-content">
-            {% block main_content %}
+            <ul class="nav nav-pills flex-column flex-sm-row">
+                <a class="flex-sm-fill text-sm-left nav-link active" href="#">Dashboard</a>
+                <a class="flex-sm-fill text-sm-left nav-link" href="#">Barangay</a>
+                <a class="flex-sm-fill text-sm-left nav-link" href="#">Consumers</a>
+            </ul>
+        </nav>
+        <div class="row">
+            <nav class="navbar navbar-light bg-light">
+                <button class="btn btn-light mx-3" type="button" popovertarget="sidenav" popovertargetaction="show">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </nav>
+            <div class="bg-white">
+                {% block main_content %}
 
-            {% endblock %}
+                {% endblock %}
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,91 +1,21 @@
-.sidenav-container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-
-.drawer-content {
-  background-color: $bg-dark-primary;
-  color: $text-white;
-  width: rem(250);
-  padding: rem(20);
+#sidenav {
+  display: block;
+  width: 250px;
   height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  transition: all 0.3s ease;
-  z-index: 1000;
-
-  .sidenav-brand {
-    a {
-      color: white;
-      font-size: rem(24);
-      text-decoration: none;
-      display: block;
-      margin-bottom: rem(30);
-      font-weight: bold;
-    }
-  }
-
-  .sidenav-content {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sidenav-link {
-    color: #ecf0f1;
-    text-decoration: none;
-    padding: 10px 0;
-    font-size: 16px;
-    margin: 5px 0;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: #34495e;
-    }
-  }
-}
-
-.main-content {
-  margin-left: 250px;
   padding: 20px;
-  flex-grow: 1;
-  transition: margin-left 0.3s ease;
-  transition: all 0.3s ease;
-
-  @media screen and (max-width: 576px) {
-    margin-left: 60px;
-    padding-left: 20px;
-    padding-right: 20px;
-    transition: margin-left 0.3s ease, box-shadow 0.3s ease;
-  }
+  border: 0;
+  margin-right: auto;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  transition-behavior: allow-discrete;
+  border-bottom-right-radius: 0.625rem;
+  border-top-right-radius: 0.625rem;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateX(-250px);
+  opacity: 0;
+  z-index: 999;
 }
 
-@media screen and (max-width: 768px) {
-  .drawer-content {
-    width: 200px;
-  }
-
-  .main-content {
-    margin-left: 200px;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .drawer-content {
-    width: 80%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
-  }
-
-  .main-content {
-    margin-left: 60px;
-    padding-left: 20px;
-    padding-right: 20px;
-    transition: margin-left 0.3s ease, box-shadow 0.3s ease;
-  }
+#sidenav:popover-open {
+  opacity: 1;
+  transform: translateX(0px);
 }
