@@ -1,5 +1,10 @@
+import django.http
 import django.template.response
+import django.http.response
 import cluster_iq.utils
+import consumer.utils
+
+from consumer.forms import CSVUploadForm
 
 
 def index(request):
@@ -24,3 +29,20 @@ def index(request):
     }
 
     return django.template.response.TemplateResponse(request, template_path, context=context)
+
+
+def upload_datasets(request):
+    template_path = 'pages/consumer.page.html'
+    if request.method == 'POST':
+        form = CSVUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            csv_file = form.cleaned_data['csv_file']
+
+            serialized_data = consumer.utils.serialize_datasets(csv_file)
+
+            return django.http.JsonResponse({'status': 'success', 'data': serialized_data})
+        else:
+            return django.template.response.TemplateResponse(request, template_path, {'form': form})
+
+    form = CSVUploadForm()
+    return django.template.response.TemplateResponse(request, template_path, {'form': form})
