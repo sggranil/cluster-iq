@@ -1,4 +1,7 @@
 import csv
+import datetime
+import pytz
+
 from io import TextIOWrapper
 
 
@@ -22,3 +25,21 @@ def serialize_datasets(csv_file):
         serialized_data.append(dict(row))
 
     return serialized_data
+
+
+def parse_timestamp(date_string):
+    try:
+        date_string = date_string.replace("GMT", "").strip()
+
+        if date_string[-1].isdigit() and date_string[-2] in "+-":
+            date_string = date_string[:-1] + "0" + date_string[-1] + ":00"
+
+        date_format = "%Y/%m/%d %I:%M:%S %p %z"
+        parsed_date = datetime.datetime.strptime(date_string, date_format)
+
+        timezone = pytz.timezone("Asia/Singapore")
+        timezone_aware_date = parsed_date.astimezone(timezone)
+
+        return timezone_aware_date
+    except ValueError:
+        raise ValueError(f"Timestamp '{date_string}' has an invalid format.")
