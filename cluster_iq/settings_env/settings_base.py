@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard',
     'consumer',
+    'geographical',
+    'market',
     'compressor',
     'bootstrap5'
 ]
