@@ -1,0 +1,52 @@
+{% extends "components/modals/modal_base.component.html" %}
+{% load static %}
+
+{% block modal_content %}
+    <form method="post" enctype="multipart/form-data" action="{% url 'consumer:upload_datasets' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="modal-body">
+            <div class="upload-container">
+                <div class="upload-info">
+                    <i class="fa-solid fa-upload" style="color: #6d6d6d"></i>
+                    <p id="upload-title" class="text-muted">Uploaded file will appear here.</p>
+                </div>
+                <input type="file" id="upload_csv" name="csv_file" accept=".csv" hidden>
+                <label class="btn btn-success" for="upload_csv">Upload CSV File</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="save_button" disabled>Save to Database</button>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const uploadInput = document.getElementById("upload_csv");
+            const uploadTitle = document.getElementById("upload-title");
+            const saveButton = document.getElementById("save_button");
+
+            uploadInput.addEventListener("change", function () {
+                if (uploadInput.files.length > 0) {
+                    const fileName = uploadInput.files[0].name;
+                    uploadTitle.textContent = fileName;
+
+                    saveButton.disabled = false;
+                    saveButton.classList.remove("disabled");
+                } else {
+                    uploadTitle.textContent = "Uploaded file will appear here.";
+                    saveButton.disabled = true;
+                    saveButton.classList.add("disabled");
+                }
+            });
+
+            const modal = document.querySelector('.modal');
+            modal.addEventListener('hidden.bs.modal', function () {
+                uploadInput.value = '';
+                uploadTitle.textContent = "Uploaded file will appear here.";
+                saveButton.disabled = true;
+                saveButton.classList.add("disabled");
+            });
+        });
+    </script>
+{% endblock %}

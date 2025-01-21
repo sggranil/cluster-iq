@@ -1,0 +1,20 @@
+.upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: rem(20) 0;
+
+  .upload-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .fa-upload {
+      margin-bottom: rem(5);
+      font-size: rem(69);
+      color: $gray-700;
+    }
+  }
+}
