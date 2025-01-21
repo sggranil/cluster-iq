@@ -1,0 +1,48 @@
+<div class="d-flex flex-row">
+    <select id="barangayFilter" class="form-select custom-dropdown form-select-md">
+        <option value="" selected>Select Barangay</option>
+        <option value="Barretto">Barretto</option>
+        <option value="East Bajac-bajac">East Bajac-bajac</option>
+        <option value="East Tapinac">East Tapinac</option>
+        <option value="Gordon Heights">Gordon Heights</option>
+        <option value="Kalaklan">Kalaklan</option>
+        <option value="Mabayuan">Mabayuan</option>
+        <option value="New Asinan">New Asinan</option>
+        <option value="New Banicain">New Banicain</option>
+        <option value="New Cabalan">New Cabalan</option>
+        <option value="New Ilalim">New Ilalim</option>
+        <option value="New Kababae">New Kababae</option>
+        <option value="New Kalalake">New Kalalake</option>
+        <option value="Old Cabalan">Old Cabalan</option>
+        <option value="Pag-asa">Pag-asa</option>
+        <option value="Santa Rita">Santa Rita</option>
+        <option value="West Bajac-bajac">West Bajac-bajac</option>
+        <option value="West Tapinac">West Tapinac</option>
+    </select>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const barangayFilter = document.getElementById('barangayFilter');
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('barangay')) {
+            const barangayValue = params.get('barangay');
+            const matchingOption = Array.from(barangayFilter.options).find(option => option.value === barangayValue);
+            if (matchingOption) {
+                barangayFilter.value = barangayValue;
+            }
+        }
+
+        barangayFilter.addEventListener('change', function () {
+            const selectedBarangay = barangayFilter.value;
+            const currentUrl = new URL(window.location.href);
+            if (selectedBarangay) {
+                currentUrl.searchParams.set('barangay', selectedBarangay);
+            } else {
+                currentUrl.searchParams.delete('barangay');
+            }
+            window.location.href = currentUrl.toString();
+        });
+    });
+</script>

@@ -1,0 +1,41 @@
+<select id="incomeLevelFilter" class="form-select custom-dropdown form-select-md">
+    <option value="">Select Income Level</option>
+    <option value="0-9999">₱0 - ₱9,999</option>
+    <option value="10000-19999">₱10,000 - ₱19,999</option>
+    <option value="20000-29999">₱20,000 - ₱29,999</option>
+    <option value="30000+">₱30,000+</option>
+</select>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const params = new URLSearchParams(window.location.search);
+        const incomeLevelFilter = document.getElementById('incomeLevelFilter');
+
+        // Set the dropdown value based on the URL parameter
+        if (params.has('income_level')) {
+            const incomeLevelValue = params.get('income_level');
+            const matchingOption = Array.from(incomeLevelFilter.options).find(
+                option => option.value === incomeLevelValue
+            );
+            if (matchingOption) {
+                incomeLevelFilter.value = incomeLevelValue;
+            } else {
+                incomeLevelFilter.value = ""; // Default to the placeholder if no match
+            }
+        }
+
+        incomeLevelFilter.addEventListener('change', function () {
+            updateUrlParam('income_level', this.value);
+        });
+
+        function updateUrlParam(key, value) {
+            const currentUrl = new URL(window.location.href);
+            if (value) {
+                currentUrl.searchParams.set(key, value);
+            } else {
+                currentUrl.searchParams.delete(key);
+            }
+            window.location.href = currentUrl.toString();
+        }
+    });
+</script>

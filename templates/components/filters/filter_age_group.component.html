@@ -1,0 +1,31 @@
+<select id="ageGroupFilter" class="form-select custom-dropdown form-select-md">
+    <option value="">Select Age Group</option>
+    <option value="18-24">18 - 24</option>
+    <option value="25-34">25 - 34</option>
+    <option value="35-44">35 - 44</option>
+    <option value="45-54">45 - 54</option>
+    <option value="55+">55+</option>
+</select>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const ageGroupFilter = document.getElementById('ageGroupFilter');
+
+    if (params.has('age_group')) {
+        ageGroupFilter.value = params.get('age_group');
+    }
+
+    ageGroupFilter.addEventListener('change', function() {
+        updateUrlParam('age_group', this.value);
+    });
+
+    function updateUrlParam(key, value) {
+        const currentUrl = new URL(window.location.href);
+        if (value) {
+            currentUrl.searchParams.set(key, value);
+        } else {
+            currentUrl.searchParams.delete(key);
+        }
+        window.location.href = currentUrl.toString();
+    }
+</script>
