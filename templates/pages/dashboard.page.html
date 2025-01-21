@@ -16,13 +16,13 @@
                 <!-- Analytics Section -->
                 <div class="row g-4">
                     <div class="col-md-4">
-                        {% include 'components/cards/card_analytics.component.html' with header="Total Responses" data="300" %}
+                        {% include 'components/cards/card_analytics.component.html' with header="Total Responses" data=analytics.total_respondents %}
                     </div>
                     <div class="col-md-4">
-                        {% include 'components/cards/card_analytics.component.html' with header="Average Spending" data="₱32,000" %}
+                        {% include 'components/cards/card_analytics.component.html' with header="Average Spending" data=analytics.average_spending %}
                     </div>
                     <div class="col-md-4">
-                        {% include 'components/cards/card_analytics.component.html' with header="Weekly Purchases" data="12" %}
+                        {% include 'components/cards/card_analytics.component.html' with header="Weekly Purchases" data=analytics.weekly_purchase %}
                     </div>
                 </div>
 
