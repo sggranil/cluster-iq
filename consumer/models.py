@@ -4,7 +4,7 @@ from market.models import ProductCategory
 
 
 class ConsumerProfile(models.Model):
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(unique=True)
     age_group = models.CharField(max_length=50)
     gender = models.CharField(max_length=10)
     income_level = models.CharField(max_length=50)
