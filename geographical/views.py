@@ -1,3 +1,7 @@
-from django.shortcuts import render
+import django.template.response
 
-# Create your views here.
+
+def index(request):
+    template_path = 'pages/geographical.page.html'
+
+    return django.template.response.TemplateResponse(request, template_path)

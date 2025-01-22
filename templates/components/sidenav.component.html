@@ -13,7 +13,7 @@
             <ul class="nav nav-pills flex-column flex-sm-row">
                 <a class="flex-sm-fill text-sm-left nav-link {% if 'dashboard' in request.path %}active{% endif %}" href="{% url_with_params 'dashboard:index' query=request.GET %}">Dashboard</a>
                 <a class="flex-sm-fill text-sm-left nav-link {% if 'consumer' in request.path %}active{% endif %}" href="{% url_with_params 'consumer:index' query=request.GET %}">Consumer</a>
-                <a class="flex-sm-fill text-sm-left nav-link" href="#">Geography</a>
+                <a class="flex-sm-fill text-sm-left nav-link {% if 'geographic' in request.path %}active{% endif %}" href="{% url_with_params 'geographic:index' query=request.GET %}">Geographic</a>
             </ul>
         </nav>
         <div class="row">

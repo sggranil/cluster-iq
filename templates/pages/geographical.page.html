@@ -1,0 +1,29 @@
+{% extends "components/sidenav.component.html" %}
+{% load static %}
+
+{% block title %}Consumer | Cluster IQ Admin{% endblock %}
+
+{% block content %}
+    {% block main_content %}
+        <div class="container-fluid py-4">
+            <div class="container">
+                <div class="d-flex flex-md-row flex-column justify-content-between mb-4">
+                    <h3 class="fw-semibold text-primary mt-2">
+                        {% if request.GET.barangay %}
+                            Barangay
+                        {% else %}
+                            Overall
+                        {% endif %}
+                        Profile</h3>
+                    <div class="d-flex flex-row justify-content-center my-2">
+                        {% include 'components/filters/filter_barangay.component.html' %}
+                        <div class="ms-2 w-50">
+                            {% include 'components/filters/filter_months.component.html' %}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
