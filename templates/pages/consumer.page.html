@@ -7,12 +7,16 @@
     {% block main_content %}
         <div class="container-fluid py-4">
             <div class="container">
-                <div class="d-flex flex-sm-row flex-column justify-content-between mb-4">
-                    <h3 class="fw-semibold text-primary">Consumer</h3>
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                        <i class="fa-solid fa-plus"></i> Upload Data (CSV)
-                    </button>
-                    {% include 'components/utilities/utilities_upload_csv.component.html' with modalId="uploadModal" title="Upload CSV File" %}
+                <div class="d-flex flex-md-row flex-column justify-content-between mb-4">
+                    <h3 class="fw-semibold text-primary mt-2">Consumer</h3>
+                    <div class="d-flex flex-row justify-content-center my-2">
+                        <button class="btn btn-success btn-sm w-50" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                            <i class="fa-solid fa-upload"></i> Upload CSV
+                        </button>
+                        <div class="ms-2">
+                            {% include 'components/filters/filter_months.component.html' %}
+                        </div>
+                    </div>
                 </div>
                 <hr>
 
@@ -26,9 +30,6 @@
                     <div class="col-md-4 col-12 mb-2 d-flex align-items-center">
                         <div class="flex-grow-1">
                             {% include 'components/filters/filter_barangay.component.html' %}
-                        </div>
-                        <div class="ms-2">
-                            {% include 'components/filters/filter_delete.component.html' %}
                         </div>
                     </div>
                 </div>
@@ -47,7 +48,6 @@
                 </div>
             </div>
         </div>
-
-        {{ form }}
+        {% include 'components/utilities/utilities_upload_csv.component.html' with modalId="uploadModal" title="Upload CSV File" %}
     {% endblock %}
 {% endblock %}

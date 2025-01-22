@@ -59,6 +59,9 @@
 
     resetMonthYearFilter.addEventListener('click', function() {
         const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.delete('barangay');
+        currentUrl.searchParams.delete('age_group');
+        currentUrl.searchParams.delete('income_level');
         const formattedValue = `01-${currentYear}`;
         currentUrl.searchParams.set('month', formattedValue);
 

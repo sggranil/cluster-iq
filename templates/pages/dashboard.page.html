@@ -31,10 +31,10 @@
                     <h5 class="text-muted fw-semibold">Insights</h5>
                     <div class="row">
                         <div class="col-md-4 col-12 my-2">
-                            {% include 'components/charts/chart_base.component.html' with title="Age Group Distribution" chartType="pie" chartId="ageGroup" data=graph.age_group %}
+                            {% include 'components/charts/chart_base.component.html' with title="Age Group" chartType="pie" chartId="ageGroup" data=graph.age_group %}
                         </div>
                         <div class="col-md-4 col-12 my-2">
-                            {% include 'components/charts/chart_base.component.html' with title="Monthly Spending Distribution" chartType="polarArea" chartId="monthlySpend" data=graph.monthly_spending %}
+                            {% include 'components/charts/chart_base.component.html' with title="Spending Distribution" chartType="polarArea" chartId="monthlySpend" data=graph.monthly_spending %}
                         </div>
                         <div class="col-md-4 col-12 my-2">
                             {% include 'components/charts/chart_base.component.html' with title="Shopping Frequency" chartType="doughnut" chartId="shoppingFrequency" data=graph.shopping_frequency %}
