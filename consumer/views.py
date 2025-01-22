@@ -10,8 +10,6 @@ import geographical.models
 import market.models
 
 from django.db.models import F, Count
-from django.shortcuts import redirect
-from django.urls import reverse
 from django.contrib import messages
 
 from consumer.forms import CSVUploadForm
@@ -27,7 +25,7 @@ def index(request):
     barangay = query.get('barangay')
 
     if len(date) != 2:
-        return messages.error(request, "Invalid date format. Expected format: YYYY-MM.")
+        return consumer.utils.url_with_query_params(request,'consumer:index', **{'month': '01-2025'})
 
     datasets = consumer.models.ConsumerProfile.objects.filter(
         timestamp__month=int(date[0]), timestamp__year=int(date[1])
@@ -196,4 +194,4 @@ def upload_datasets(request):
         if not error_occurred:
             messages.error(request, f"An error occurred: {str(e)}")
 
-    return redirect(reverse('consumer:index'))
+    return consumer.utils.url_with_query_params(request,'consumer:index', **{'month': '01-2025'})
