@@ -1,3 +1,4 @@
+import re
 from urllib.parse import urlencode
 
 from django.template.defaulttags import register
@@ -14,6 +15,20 @@ def chart_count_formatter(labels, counts):
         })
 
     return result
+
+
+def extract_spending_value(income_range):
+    match = re.match(r'₱([\d,]+)\s*-\s*₱([\d,]+)', income_range)
+    if match:
+        return float(match.group(1).replace(',', ''))
+
+    if income_range == 'Below ₱1,000':
+        return 1000.0
+
+    if income_range == '₱5,000 and above':
+        return 5000.0
+
+    return 0.0
 
 
 def reverse_url(view_name, *args, **kwargs):

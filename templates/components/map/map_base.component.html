@@ -1,0 +1,488 @@
+<div class="container-fluid p-0 my-2">
+    <div id="map" style="width: 100%; height: 500px;"></div>
+
+    <script>
+        const clusteredData = JSON.parse('{{ clustered_data|escapejs }}');
+
+        const customStyle = [
+            {
+                "featureType": "all",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    }
+                ]
+            },
+            {
+                "featureType": "all",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    },
+                    {
+                        "saturation": "-100"
+                    }
+                ]
+            },
+            {
+                "featureType": "all",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "saturation": 36
+                    },
+                    {
+                        "color": "#000000"
+                    },
+                    {
+                        "lightness": 40
+                    },
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "all",
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    },
+                    {
+                        "color": "#000000"
+                    },
+                    {
+                        "lightness": 16
+                    }
+                ]
+            },
+            {
+                "featureType": "all",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#000000"
+                    },
+                    {
+                        "lightness": 20
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    {
+                        "color": "#000000"
+                    },
+                    {
+                        "lightness": 17
+                    },
+                    {
+                        "weight": 1.2
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#000000"
+                    },
+                    {
+                        "lightness": 20
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#4d6059"
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    {
+                        "color": "#4d6059"
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape.natural",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#4d6059"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "lightness": 21
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#4d6059"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    {
+                        "color": "#4d6059"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "color": "#7f8d89"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#7f8d89"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#7f8d89"
+                    },
+                    {
+                        "lightness": 17
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    {
+                        "color": "#7f8d89"
+                    },
+                    {
+                        "lightness": 29
+                    },
+                    {
+                        "weight": 0.2
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#000000"
+                    },
+                    {
+                        "lightness": 18
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#7f8d89"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    {
+                        "color": "#7f8d89"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#000000"
+                    },
+                    {
+                        "lightness": 16
+                    }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#7f8d89"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    {
+                        "color": "#7f8d89"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#000000"
+                    },
+                    {
+                        "lightness": 19
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "color": "#2b3638"
+                    },
+                    {
+                        "visibility": "on"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#2b3638"
+                    },
+                    {
+                        "lightness": 17
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#24282b"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    {
+                        "color": "#24282b"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            }
+        ];
+
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 14.8378, lng: 120.2826},
+                zoom: 13,
+                styles: customStyle,
+            });
+
+            const clusterColors = ['#FF6347', '#4CAF50', '#00BFFF', '#FFD700'];
+
+            clusteredData.forEach((categoryData) => {
+                categoryData.clusters.forEach((item) => {
+                    const position = {lat: item.latitude, lng: item.longitude};
+
+                    const radius = Math.log(item.intensity + 1) * 500;
+                    const barangayCircle = new google.maps.Circle({
+                        center: position,
+                        radius: radius,
+                        strokeColor: clusterColors[item.cluster % clusterColors.length],
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: clusterColors[item.cluster % clusterColors.length],
+                        fillOpacity: 0.35,
+                    });
+
+                    barangayCircle.setMap(map);
+
+                    google.maps.event.addListener(barangayCircle, 'click', function () {
+                        const infoContent = `
+                            <div class="info-window-container">
+                                <div class="info-header">
+                                    <h4>${item.name}</h4>
+                                    <p class="info-subtitle">Barangay Overview</p>
+                                </div>
+                                <div class="info-body">
+                                    <p><strong>Intensity:</strong> ${item.intensity}</p>
+                                    <p><strong>Cluster:</strong> ${item.cluster !== -1 ? item.cluster : 'Noise'}</p>
+                                    <h5>Top 3 Product Categories</h5>
+                                    <ul>
+                                        ${item.top_3_products.map(product =>
+                            `<li>${product.product_category} - ${product.percentage}%</li>`
+                        ).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        `;
+
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: infoContent,
+                        });
+
+                        infoWindow.setPosition(position);
+                        infoWindow.open(map);
+                    });
+                });
+            });
+        }
+
+        window.onload = initMap;
+    </script>
+    <style>
+        .info-window-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            max-width: 400px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            .info-header {
+                margin-bottom: 15px;
+                border-bottom: 1px solid #f0f0f0;
+                padding-bottom: 10px;
+
+                h4 {
+                    font-size: 20px;
+                    color: #333;
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                }
+
+                .info-subtitle {
+                    font-size: 14px;
+                    color: #888;
+                }
+            }
+
+            .info-body {
+                p {
+                    font-size: 16px;
+                    margin: 8px 0;
+                    color: #555;
+                }
+
+                h5 {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #333;
+                    margin-top: 15px;
+                }
+
+                ul {
+                    padding-left: 20px;
+                    list-style-type: none;
+
+                    li {
+                        font-size: 14px;
+                        color: #666;
+                        margin: 4px 0;
+                    }
+                }
+            }
+        }
+
+    </style>
+</div>
