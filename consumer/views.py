@@ -9,6 +9,7 @@ import consumer.models
 import geographical.models
 import market.models
 
+from django.db.models import F, Count
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib import messages
@@ -18,17 +19,44 @@ from consumer.forms import CSVUploadForm
 
 def index(request):
     template_path = 'pages/consumer.page.html'
+
+    query = request.GET
+    date = query.get('month', '').split('-')
+    age_group = query.get('age_group')
+    income_level = query.get('income_level')
+    barangay = query.get('barangay')
+
+    if len(date) != 2:
+        return messages.error(request, "Invalid date format. Expected format: YYYY-MM.")
+
+    datasets = consumer.models.ConsumerProfile.objects.filter(
+        timestamp__month=int(date[0]), timestamp__year=int(date[1])
+    )
+
+    if age_group:
+        datasets = datasets.filter(age_group=age_group)
+    if income_level:
+        datasets = datasets.filter(income_level=income_level)
+    if barangay:
+        datasets = datasets.filter(barangay__name=barangay)
+
+    shopping_preference_data = (datasets.values('shopping_preference').annotate(count=Count('shopping_preference')))
+    product_preferences_data = ((datasets.values('product_preferences__name')
+                                .annotate(preference_name=F('product_preferences__name'), count=Count('product_preferences')))
+                                .values('preference_name', 'count'))
+    spending_category_data = datasets.values('spending_category').annotate(count=Count('spending_category'))
+
     shopping_preferences = cluster_iq.utils.chart_count_formatter(
-        ['In-store', 'Online'],
-        [60, 40]
+        [entry['shopping_preference'] for entry in shopping_preference_data],
+        [entry['count'] for entry in shopping_preference_data]
     )
     product_preferences = cluster_iq.utils.chart_count_formatter(
-        ['Food and Beverages', 'Personal Care', 'Clothing', 'Electronics'],
-        [45, 30, 15, 10]
+        [entry['preference_name'] for entry in product_preferences_data],
+        [entry['count'] for entry in product_preferences_data]
     )
     spending_patterns = cluster_iq.utils.chart_count_formatter(
-        ['18-24', '25-34', '35-44', '45+'],
-        [1500, 2500, 3500, 4000]
+        [entry['spending_category'] for entry in spending_category_data],
+        [entry['count'] for entry in spending_category_data]
     )
 
     context = {
