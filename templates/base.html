@@ -30,6 +30,7 @@
 {% endblock %}
 
 <script src="{% static 'js/main.js' %}?time={% now 'U' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ google_map_api_key }}"></script>
 {% block script %} {% endblock %}
 </body>
 </html>
