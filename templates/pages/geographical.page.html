@@ -23,6 +23,13 @@
                     </div>
                 </div>
                 <hr>
+                <div class="container-fluid p-0">
+                    {% if request.GET.barangay %}
+                        {% include 'pages/sections/barangay_profile.page.html' %}
+                    {% else %}
+                        {% include 'pages/sections/overall_profile.page.html' %}
+                    {% endif %}
+                </div>
             </div>
         </div>
     {% endblock %}

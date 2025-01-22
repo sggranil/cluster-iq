@@ -1,1 +1,18 @@
 {% load static %}
+
+<div class="row">
+    <div class="col-md-6 my-2">
+        {% include 'components/cards/card_items.component.html' with header="Average Income per Barangay" data=average_income_barangay %}
+    </div>
+    <div class="col-md-6 my-2">
+        {% include 'components/cards/card_items.component.html' with header="Average Spending per Barangay" data=average_spent_barangay %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 my-2">
+        {% include 'components/cards/card_items.component.html' with header="Demanding Product Category" data=most_demand_product %}
+    </div>
+    <div class="col-md-6 my-2">
+        {% include 'components/cards/card_items.component.html' with header="Demanding Service per Barangay" data=demand_per_barangay %}
+    </div>
+</div>
