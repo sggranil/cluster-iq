@@ -1,7 +1,7 @@
 {% extends "components/sidenav.component.html" %}
 {% load static %}
 
-{% block title %}Consumer | Cluster IQ Admin{% endblock %}
+{% block title %}Geographic | Cluster IQ Admin{% endblock %}
 
 {% block content %}
     {% block main_content %}
@@ -16,14 +16,12 @@
                         {% endif %}
                         Profile</h3>
                     <div class="d-flex flex-row justify-content-center my-2">
-                        {% include 'components/filters/filter_barangay.component.html' %}
-                        <div class="ms-2 w-50">
-                            {% include 'components/filters/filter_months.component.html' %}
-                        </div>
+                        {% include 'components/filters/filter_months.component.html' %}
                     </div>
                 </div>
                 <hr>
                 <div class="container-fluid p-0">
+                    {% include 'components/map/map_base.component.html' %}
                     {% if request.GET.barangay %}
                         {% include 'pages/sections/barangay_profile.page.html' %}
                     {% else %}
