@@ -3,18 +3,24 @@
 <div class="card shadow-sm border-0 rounded-3" style="min-height: 350px">
     <div class="card-body">
         <h5 class="fw-bold text-muted text-uppercase mb-0">{{ header }}</h5>
-        {% for items in data %}
-            <div class="d-flex flex-column py-2 px-2">
-                <div class="d-flex flex-row justify-content-between align-items-end my-1">
-                    <h6 class="text-dark fw-bold mb-1 fs-5">{{ forloop.counter }}. {{ items.name }}</h6>
-                    {% if items.average %}
-                        <span class="text-success fw-bold">₱{{ items.average|floatformat:2|intcomma }}</span>
-                    {% endif %}
-                    {% if items.product_category %}
-                        <span class="text-success fw-bold">{{ items.product_category }} ({{ items.percentage }}%)</span>
-                    {% endif %}
+        {% if data %}
+            {% for items in data %}
+                <div class="d-flex flex-column py-2 px-2">
+                    <div class="d-flex flex-row justify-content-between align-items-end my-1">
+                        <h6 class="text-dark fw-bold mb-1 fs-5">{{ forloop.counter }}. {{ items.name }}</h6>
+                        {% if items.average %}
+                            <span class="text-success fw-bold">₱{{ items.average|floatformat:2|intcomma }}</span>
+                        {% endif %}
+                        {% if items.product_category %}
+                            <span class="text-success fw-bold">{{ items.product_category }} ({{ items.percentage }}%)</span>
+                        {% endif %}
+                    </div>
                 </div>
+            {% endfor %}
+        {% else %}
+            <div class="d-flex align-items-center justify-content-center" style="min-height: 350px">
+                <p class="fw-bold text-center">No data available.</p>
             </div>
-        {% endfor %}
+        {% endif %}
     </div>
 </div>
