@@ -1,6 +1,7 @@
 import django.template.response
 import consumer.models
 import cluster_iq.utils
+import consumer.utils
 import re
 
 from django.contrib import messages
@@ -11,8 +12,9 @@ def index(request):
     template_path = 'pages/dashboard.page.html'
 
     date = request.GET.get('month', '').split('-')
+
     if len(date) != 2:
-        return messages.error(request,"Invalid date format. Expected format: YYYY-MM.")
+        return consumer.utils.url_with_query_params(request,'dashboard:index', **{'month': '01-2025'})
 
     month = int(date[0])
     year = int(date[1])

@@ -1,8 +1,12 @@
 import csv
 import datetime
+from urllib.parse import urlencode
+
 import pytz
 
 from io import TextIOWrapper
+from django.shortcuts import redirect
+from django.urls import reverse
 
 
 def serialize_datasets(csv_file):
@@ -43,3 +47,18 @@ def parse_timestamp(date_string):
         return timezone_aware_date
     except ValueError:
         raise ValueError(f"Timestamp '{date_string}' has an invalid format.")
+
+
+def url_with_query_params(request, url, **kwargs):
+    """
+    Redirect to a URL with optional query parameters.
+
+    :param request: The current request object (not used directly here but can be used for additional context if needed)
+    :param url: The URL name as defined in Django's `urls.py`.
+    :param kwargs: Optional query parameters to include in the redirect.
+    :return: A redirect response to the constructed URL.
+    """
+    base_url = reverse(url)
+    query_string = urlencode(kwargs)
+    full_url = f"{base_url}?{query_string}" if query_string else base_url
+    return redirect(full_url)
